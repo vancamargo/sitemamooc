@@ -9,11 +9,14 @@
   <ion-navbar>
     <ion-title>Formulário Mooc</ion-title>
     <ion-buttons end>
+
       <button icon-only="" ion-button="" (click)="save()">
         Salvar
       </button>
 
+
     </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
@@ -21,29 +24,32 @@
   <ion-list>
     <ion-item>
       <ion-label stacked="">Nome do Curso</ion-label>
-      <ion-input text="" [(ngModel)] = "curso.nomecurso"></ion-input>
+      <ion-input text="" [(ngModel)] = "curso.nomecurso" ></ion-input>
 
     </ion-item>
 
     <ion-item>
       <ion-label stacked=""> QtdeDiaVencimento </ion-label>
-      <ion-input text="" [(ngModel)] = "curso.qtdedia"></ion-input>
+      <ion-input type="number" [(ngModel)] = "curso.qtdedia" maxlength="4"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked="">  Valor </ion-label>
-      <ion-input text="" [(ngModel)] = "curso.valor">></ion-input>
+      <ion-input type="text" [(ngModel)] = "curso.valor" name="money" placeholder="(R$) Real" [brmasker]="{money: true}"  maxlength="9"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked="">  Descricao </ion-label>
-      <ion-input text="" [(ngModel)] = "curso.descricao">></ion-input>
+      <ion-input text="" [(ngModel)] = "curso.descricao"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked="">  MaximoParcela </ion-label>
-      <ion-input text="" [(ngModel)] = "curso.maxparcela">></ion-input>
+      <ion-input type="number" [(ngModel)] = "curso.maxparcela" maxlength="9"></ion-input>
     </ion-item>
+
+
+
 
 
 

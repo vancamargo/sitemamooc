@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {CursoService} from "./curso.service";
 
 import {CursoformPage} from "../cursoform/cursoform";
@@ -22,9 +22,17 @@ export class CursoPage {
   constructor(public navCtrl: NavController,
               public cursoService: CursoService,
               public alertCrl: AlertController,
+              public toastCrl: ToastController,
               public navParams: NavParams) {
 
 
+  }
+
+  showMessage(msg){
+    this.toastCrl.create({
+      message: msg,
+      duration:4000
+    }).present();
   }
 
   list(){
@@ -72,7 +80,7 @@ export class CursoPage {
 
             this.cursoService.delete(curso).subscribe(dados => {
               this.list()
-
+              this.showMessage("Curso deletado com Sucesso");
 
             })
 

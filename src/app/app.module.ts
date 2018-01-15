@@ -10,25 +10,33 @@ import {CursoPage} from "../pages/curso/curso";
 import {HttpModule} from "@angular/http";
 import {CursoService} from "../pages/curso/curso.service";
 import {CursoformPage} from "../pages/cursoform/cursoform";
+import { BrMaskerModule } from 'brmasker-ionic-3';
+import {LoginPage} from "../pages/login/login";
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     CursoPage,
-    CursoformPage
+    CursoformPage,
+    LoginPage
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     CursoPage,
-    CursoformPage
+    CursoformPage,
+    LoginPage
+
   ],
   providers: [
     StatusBar,
