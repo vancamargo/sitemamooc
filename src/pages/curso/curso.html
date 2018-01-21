@@ -20,11 +20,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
 
   <ion-list>
 
-    <button  ion-item *ngFor="let curso of cursos" (click)="goToEdit(curso)">
+    <button  ion-item *ngFor="let curso of cursosFilter" (click)="goToEdit(curso)">
 
 <button item-left clear ion-button="" icon-only="" (click)="deleteCurso(curso, $event)">
 

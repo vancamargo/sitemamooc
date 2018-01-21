@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {
+  AlertController,
+  NavController,
+  NavParams,
+  ToastController
+} from 'ionic-angular';
 import {CursoService} from "./curso.service";
 
 import {CursoformPage} from "../cursoform/cursoform";
@@ -17,7 +22,8 @@ import {CursoformPage} from "../cursoform/cursoform";
 })
 export class CursoPage {
 
-  cursos =[];
+  public cursos = [];
+  public cursosFilter = [];
 
   constructor(public navCtrl: NavController,
               public cursoService: CursoService,
@@ -26,38 +32,54 @@ export class CursoPage {
               public navParams: NavParams) {
 
 
+
   }
 
-  showMessage(msg){
+  showMessage(msg) {
     this.toastCrl.create({
       message: msg,
-      duration:4000
+      duration: 4000
     }).present();
   }
 
-  list(){
+  list() {
     this.cursoService.list().subscribe(dados => {
       this.cursos = dados;
+      this.cursosFilter = dados;
     })
   }
 
-
-  ionViewWillEnter() {
+  ionViewDidLoad() { 
     this.list();
-
   }
 
-
-  goToForm(){
+  goToForm() {
     this.navCtrl.push(CursoformPage);
   }
 
-  goToEdit(curso){
-    this.navCtrl.push(CursoformPage,{curso: curso});
+  goToEdit(curso) {
+    this.navCtrl.push(CursoformPage, {curso: curso});
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.cursosFilter = this.cursos.filter((item) => {
+
+        return (item.nomecurso.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    } else {
+      this.cursosFilter = this.cursos;
+    }
   }
 
 
-  deleteCurso(curso, $event){
+  deleteCurso(curso, $event) {
     $event.preventDefault();
     $event.stopImmediatePropagation();
     $event.stopPropagation();
@@ -66,10 +88,10 @@ export class CursoPage {
     let prompt = this.alertCrl.create({
       title: 'Deletar',
       message: "Tem certeza que deseja deletar?",
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          handler: data =>{
+          handler: data => {
             console.log('cancel clicked');
           }
         },
@@ -90,8 +112,6 @@ export class CursoPage {
       ]
     });
     prompt.present();
-
-
 
 
   }
